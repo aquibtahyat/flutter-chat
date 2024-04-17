@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat/src/core/constants/constants.dart';
 import 'package:flutter_chat/src/core/route/route_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,9 +15,12 @@ class MyApp extends ConsumerWidget {
       routeInformationProvider: router.routeInformationProvider,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Chat',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: backgroundColour,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: appGreyColour,
+          centerTitle: true,
+        ),
       ),
     );
   }
@@ -44,7 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Center(
@@ -56,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
