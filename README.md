@@ -1,16 +1,33 @@
-# flutter_chat
+## Flutter Chat App
 
-A new Flutter project.
+#### Environment
+Flutter 3.13.0
+Dart 3.1.0
 
-## Getting Started
+#### Functions
+Sign up/ Login/Logout
+Chat
+Notification
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+#### Package used
+```$xslt
+  flutter_riverpod
+  go_router
+  firebase_auth
+  cloud_firestore
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### Architecture  used
+feature-first
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Supported Platform
+Android, IOS, MacOs, Web
+
+
+#### Out of Scope
+- CI/CD
+- Localization
+- Flavors (dev, uat, prod etc)
+- unit, ui and integration test
+- secure API keys
