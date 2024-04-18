@@ -26,4 +26,8 @@ class LogInService {
       return left(e.message ?? 'Something went wrong');
     }
   }
+
+  Future<void> logOut() async {
+    await _firebaseAuth.signOut();
+  }
 }

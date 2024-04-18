@@ -17,6 +17,7 @@ class SignUpScreen extends ConsumerStatefulWidget {
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   final _formField = GlobalKey<FormState>();
 
@@ -24,7 +25,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   Widget build(BuildContext context) {
     ref.listen(signUpProvider, (previous, next) {
       if (next is SignUpSuccess) {
-        context.go(ChatAppRoutes.logInScreen);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(
+              SnackBar(
+                content: Text(
+                    "Verification mail has been sent to ${_emailController.text}"),
+              ),
+            )
+            .closed
+            .then((_) {
+          context.go(ChatAppRoutes.logInScreen);
+        });
       }
     });
 
@@ -100,14 +111,43 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     },
                   ),
                   const SizedBox(height: 8),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 12),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(color: appGreyColour),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: appWhiteColour.withOpacity(0.5)),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: appWhiteColour),
+                      ),
+                      errorBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      labelText: 'Confirm Password',
+                    ),
+                    controller: _confirmPasswordController,
+                    validator: (value) {
+                      if (value == null || value != _passwordController.text) {
+                        return 'Password doesn\'t match';
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
                         child: ElevatedButton(
                             onPressed: () async {
-                              await ref.read(signUpProvider.notifier).signup(
-                                  email: _emailController.text,
-                                  password: _passwordController.text);
+                              if (_formField.currentState!.validate()) {
+                                await ref.read(signUpProvider.notifier).signup(
+                                    email: _emailController.text,
+                                    password: _passwordController.text);
+                              }
                             },
                             child: const Text('Sign Up')),
                       ),

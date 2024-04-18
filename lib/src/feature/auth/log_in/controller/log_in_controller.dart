@@ -29,4 +29,11 @@ class LogInNotifier extends StateNotifier<LogInState> {
 
     return response;
   }
+
+  Future<void> logOut() async {
+    state = LogInLoading();
+    final response = await _logInService.logOut();
+
+    return response;
+  }
 }

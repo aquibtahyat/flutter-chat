@@ -23,16 +23,14 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen(logInProvider, (previous, next) {
-      print("next: $next");
-
       if (next is LogInSuccess) {
         context.go(ChatAppRoutes.chatListScreen);
       }
 
       if (next is LogInError) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Something went Wrong "),
+          SnackBar(
+            content: Text(next.message),
           ),
         );
       }
