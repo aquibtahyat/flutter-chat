@@ -6,7 +6,9 @@ Dart 3.1.0
 
 #### Functions
 Sign up/ Login/Logout
+
 Chat (Incomplete)
+
 Notification (Incomplete)
 
 
